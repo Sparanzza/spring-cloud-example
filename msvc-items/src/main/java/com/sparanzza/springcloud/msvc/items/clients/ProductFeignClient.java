@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.sparanzza.springcloud.msvc.items.models.Product;
 
-@FeignClient(name = "msvc-products", url = "http://localhost:8001")
+@FeignClient(name = "msvc-products")
 public interface ProductFeignClient {
 
     @GetMapping

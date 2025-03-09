@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "products")
@@ -19,6 +20,9 @@ public class Product {
     private Double price;
     @Column(name = "created_at")
     private LocalDate createdAt;
+
+    @Transient
+    private int port;
 
     public Product() {
     }
@@ -40,5 +44,13 @@ public class Product {
 
     public Double getPrice() {
         return price;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 }

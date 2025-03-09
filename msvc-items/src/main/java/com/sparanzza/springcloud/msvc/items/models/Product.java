@@ -9,14 +9,17 @@ public class Product {
     private Integer price;
     private LocalDate createAt;
 
+    private int port;
+
     public Product() {
     }
 
-    public Product(Long id, String name, Integer price, LocalDate createAt) {
+    public Product(Long id, String name, Integer price, LocalDate createAt, int port) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.createAt = createAt;
+        this.port = port;
     }
 
     public Long getId() {
@@ -27,7 +30,6 @@ public class Product {
         this.id = id;
     }
 
-
     public String getName() {
         return name;
     }
@@ -35,7 +37,6 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public Integer getPrice() {
         return price;
@@ -45,12 +46,19 @@ public class Product {
         this.price = price;
     }
 
-
     public LocalDate getCreateAt() {
         return createAt;
     }
 
     public void setCreateAt(LocalDate createAt) {
         this.createAt = createAt;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 }
