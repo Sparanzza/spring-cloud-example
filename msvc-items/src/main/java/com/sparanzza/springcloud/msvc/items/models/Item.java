@@ -3,11 +3,12 @@ package com.sparanzza.springcloud.msvc.items.models;
 public class Item {
 
     private Product product;
-    private Integer quantity;
+    private int quantity;
 
-    public Item() { }
+    public Item() {
+    }
 
-    public Item(Product product, Integer quantity) {
+    public Item(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
@@ -20,7 +21,7 @@ public class Item {
         this.product = product;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
