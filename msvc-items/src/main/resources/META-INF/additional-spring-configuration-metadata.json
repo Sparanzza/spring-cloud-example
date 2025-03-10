@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "config.baseurl.endpoint.msvc-products",
+      "type": "java.lang.String",
+      "description": "The url web client to connect to the database"
+    }
+  ]
+}
