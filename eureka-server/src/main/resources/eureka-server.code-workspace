@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../msvc-items"
+		},
+		{
+			"path": "../../../../msvc-products"
+		}
+	],
+	"settings": {}
+}
