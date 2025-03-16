@@ -2,8 +2,8 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: mvsc-products
-          uri: lb://mvsc-products
+        - id: msvc-products
+          uri: lb://msvc-products
           predicates:
           - Path=/api/products/**
           filters:
