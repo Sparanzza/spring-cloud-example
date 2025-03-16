@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../../../../msvc-products"
+		},
+		{
+			"path": "../../../../msvc-gateway-server"
 		}
 	],
 	"settings": {}
