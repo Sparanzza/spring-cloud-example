@@ -13,5 +13,7 @@
 			"path": "msvc-gateway-server"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
 }
