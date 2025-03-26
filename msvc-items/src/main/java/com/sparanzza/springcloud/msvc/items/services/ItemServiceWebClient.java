@@ -6,11 +6,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import com.sparanzza.springcloud.msvc.items.models.Item;
 import com.sparanzza.springcloud.msvc.items.models.Product;
@@ -38,22 +36,16 @@ public class ItemServiceWebClient implements ItemService {
     }
 
     @Override
-    public Optional<Item> findById(Long id) {
-
-        try {
-            Map<String, Long> params = new HashMap<>();
-            params.put("id", id);
-            return this.client.build().get()
-                    .uri("/{id}", params)
-                    .accept(MediaType.APPLICATION_JSON)
-                    .retrieve()
-                    .bodyToMono(Product.class)
-                    .map(p -> new Item(p, random.nextInt(9) + 1))
-                    .map(Optional::of)
-                    .block();
-        } catch (WebClientResponseException e) {
-            return Optional.empty();
-        }
+    public Optional<Item> findById(Long id) {        Map<String, Long> params = new HashMap<>();
+        params.put("id", id);
+        return this.client.build().get()
+                .uri("/{id}", params)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(Product.class)
+                .map(p -> new Item(p, random.nextInt(9) + 1))
+                .map(Optional::of)
+                .block();
 
     }
 }

@@ -2,7 +2,10 @@ package com.sparanzza.springcloud.msvc.items.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 import com.sparanzza.springcloud.msvc.items.models.Item;
+import com.sparanzza.springcloud.msvc.items.models.Product;
 import com.sparanzza.springcloud.msvc.items.services.ItemService;
+
+import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +14,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,11 +25,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ItemController {
 
     private final ItemService service;
+    private final CircuitBreakerFactory cbFactory;
     private final Logger logger = LoggerFactory.getLogger(ItemController.class);
 
 
-    public ItemController(@Qualifier("itemServiceWebClient") ItemService itemService) {
+    public ItemController(@Qualifier("itemServiceWebClient") ItemService itemService, CircuitBreakerFactory cbFactory) {
         this.service = itemService;
+        this.cbFactory = cbFactory;
     }
 
     @GetMapping()
@@ -39,7 +45,16 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> detail(@PathVariable Long id) {
-        Optional<Item> item = service.findById(id);
+        Optional<Item> item = cbFactory.create("items").run(() -> service.findById(id),
+                throwable -> {
+                    logger.error(throwable.getMessage());
+                    Product productFallback = new Product();
+                    productFallback.setId(1L);
+                    productFallback.setName("Product not found");
+                    productFallback.setPrice(0);
+                    return Optional.of(new Item(productFallback, 5));
+                });
+                
         if (item.isPresent()) {
             return ResponseEntity.ok(item.get());
         }
