@@ -11,6 +11,10 @@
 		},
 		{
 			"path": "msvc-gateway-server"
+		},
+		{
+			"name": "config-server",
+			"path": "config-server"
 		}
 	],
 	"settings": {
