@@ -36,7 +36,8 @@ public class ItemServiceWebClient implements ItemService {
     }
 
     @Override
-    public Optional<Item> findById(Long id) {        Map<String, Long> params = new HashMap<>();
+    public Optional<Item> findById(Long id) {        
+        Map<String, Long> params = new HashMap<>();
         params.put("id", id);
         return this.client.build().get()
                 .uri("/{id}", params)

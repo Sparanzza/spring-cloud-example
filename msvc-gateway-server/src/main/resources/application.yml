@@ -1,3 +1,24 @@
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+    instances:
+      products:
+        baseConfig: default
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 4000ms
+    instances:
+      products:
+        baseConfig: default
+
 spring:
   cloud:
     gateway:
@@ -5,24 +26,29 @@ spring:
         - id: msvc-products
           uri: lb://msvc-products
           predicates:
-          - Path=/api/products/**
+            - Path=/api/products/**
           # - Header=X-Request-Id, 12345
           # - Method=GET,POST
           # - Query=color, verde
           # - Cookie=color, azul
           filters:
-          - StripPrefix=2
-          - name: SampleCookie
-            args:
-              name: "user"
-              message: "This is a sample cookie"
-              value: "Aurelio"
+            - name: CircuitBreaker
+              args:
+                name: products
+                statusCode: 500,404
+                fallbackUri: forward:/api/items/11
+            - StripPrefix=2
+            - name: SampleCookie
+              args:
+                name: "user"
+                message: "This is a sample cookie"
+                value: "Aurelio"
         - id: msvc-items
           uri: lb://msvc-items
           predicates:
-          - Path=/api/items/**
+            - Path=/api/items/**
           filters:
-          - StripPrefix=2
-          - AddRequestHeader=X-Request-Foo, Bar
-          - AddResponseHeader=X-Response-Foo, Bar
-          - AddRequestParameter=foo, bar
+            - StripPrefix=2
+            - AddRequestHeader=X-Request-Foo, Bar
+            - AddResponseHeader=X-Response-Foo, Bar
+            - AddRequestParameter=foo, bar

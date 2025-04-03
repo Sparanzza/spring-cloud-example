@@ -45,15 +45,7 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> detail(@PathVariable Long id) {
-        Optional<Item> item = cbFactory.create("items").run(() -> service.findById(id),
-                throwable -> {
-                    logger.error(throwable.getMessage());
-                    Product productFallback = new Product();
-                    productFallback.setId(1L);
-                    productFallback.setName("Product not found");
-                    productFallback.setPrice(0);
-                    return Optional.of(new Item(productFallback, 5));
-                });
+        Optional<Item> item = service.findById(id);
                 
         if (item.isPresent()) {
             return ResponseEntity.ok(item.get());
