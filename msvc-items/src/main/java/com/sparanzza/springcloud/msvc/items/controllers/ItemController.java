@@ -2,18 +2,18 @@ package com.sparanzza.springcloud.msvc.items.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 import com.sparanzza.springcloud.msvc.items.models.Item;
-import com.sparanzza.springcloud.msvc.items.models.Product;
 import com.sparanzza.springcloud.msvc.items.services.ItemService;
 
-import io.github.resilience4j.circuitbreaker.CircuitBreaker;
-
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +28,28 @@ public class ItemController {
     private final CircuitBreakerFactory cbFactory;
     private final Logger logger = LoggerFactory.getLogger(ItemController.class);
 
+    @Value("${configuracion.texto}")
+    private String text;
+
 
     public ItemController(@Qualifier("itemServiceWebClient") ItemService itemService, CircuitBreakerFactory cbFactory) {
         this.service = itemService;
         this.cbFactory = cbFactory;
     }
 
+    @GetMapping("/config")
+    public ResponseEntity<?> fetchConfig(@Value("${server.port}") String port) {
+        Map<String, String> map = new HashMap <>();
+        map.put("text", text);
+        map.put("port", port);
+        logger.info(port);
+        logger.info(text);
+        return ResponseEntity.ok(map);
+    }
+
     @GetMapping()
     public List<Item> list(@RequestParam(name = "foo", required = false) String name,
             @RequestHeader(name = "X-Request-Foo", required = false) String token) {
-
         logger.info("name = " + name);
         logger.info("token = " + token);
         return service.findAll();
