@@ -12,9 +12,11 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +34,9 @@ public class ItemController {
     private String text;
 
 
+    @Autowired
+    private Environment env;
+
     public ItemController(@Qualifier("itemServiceWebClient") ItemService itemService, CircuitBreakerFactory cbFactory) {
         this.service = itemService;
         this.cbFactory = cbFactory;
@@ -44,6 +49,12 @@ public class ItemController {
         map.put("port", port);
         logger.info(port);
         logger.info(text);
+
+        if (env.getActiveProfiles().length > 0 && env.getActiveProfiles()[0].equals("dev")) {
+            map.put("author.name", env.getProperty("configuracion.autor.nombre"));
+            map.put("author.email", env.getProperty("configuracion.autor.apellido"));
+        }
+
         return ResponseEntity.ok(map);
     }
 
