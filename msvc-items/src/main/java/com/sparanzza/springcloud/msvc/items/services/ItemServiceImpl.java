@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sparanzza.springcloud.msvc.items.clients.ProductFeignClient;
 import com.sparanzza.springcloud.msvc.items.models.Item;
+import com.sparanzza.springcloud.msvc.items.models.Product;
 
 import feign.FeignException;
 
@@ -42,5 +43,20 @@ public class ItemServiceImpl implements ItemService {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public Product save(Product product) {
+        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    }
+
+    @Override
+    public Product update(Product product, long id) {
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
     }
 }
