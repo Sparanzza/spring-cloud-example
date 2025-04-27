@@ -47,16 +47,16 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Product save(Product product) {
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return client.create(product);
     }
 
     @Override
     public Product update(Product product, long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        return client.update(product, id);
     }
 
     @Override
     public void deleteById(Long id) {
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+        client.deleteById(id);
     }
 }
