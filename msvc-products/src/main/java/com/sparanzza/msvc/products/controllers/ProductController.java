@@ -2,7 +2,7 @@ package com.sparanzza.msvc.products.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sparanzza.msvc.products.entities.Product;
+import com.sparanzza.libs.msvc.commons.entities.Product;
 import com.sparanzza.msvc.products.services.ProductService;
 
 import java.util.List;

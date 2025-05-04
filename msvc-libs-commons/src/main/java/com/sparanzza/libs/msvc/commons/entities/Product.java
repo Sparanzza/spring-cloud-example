@@ -1,4 +1,4 @@
-package com.sparanzza.msvc.products.entities;
+package com.sparanzza.libs.msvc.commons.entities;
 
 import java.time.LocalDate;
 import jakarta.persistence.Column;

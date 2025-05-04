@@ -1,8 +1,9 @@
 package com.sparanzza.springcloud.msvc.items.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sparanzza.libs.msvc.commons.entities.Product;
 import com.sparanzza.springcloud.msvc.items.models.Item;
-import com.sparanzza.springcloud.msvc.items.models.Product;
 import com.sparanzza.springcloud.msvc.items.services.ItemService;
 
 import java.util.Collections;

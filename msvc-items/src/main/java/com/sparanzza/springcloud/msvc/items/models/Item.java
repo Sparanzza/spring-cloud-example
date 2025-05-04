@@ -1,5 +1,7 @@
 package com.sparanzza.springcloud.msvc.items.models;
 
+import com.sparanzza.libs.msvc.commons.entities.Product;
+
 public class Item {
 
     private Product product;

@@ -3,7 +3,7 @@ package com.sparanzza.msvc.products.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.sparanzza.msvc.products.entities.Product;
+import com.sparanzza.libs.msvc.commons.entities.Product;
 
 public interface ProductService {
     List<Product> findAll();

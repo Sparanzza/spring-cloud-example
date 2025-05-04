@@ -18,6 +18,10 @@
 		},
 		{
 			"path": "../../../Desktop/config"
+		},
+		{
+			"name": "msvc-libs-commons",
+			"path": "msvc-libs-commons"
 		}
 	],
 	"settings": {

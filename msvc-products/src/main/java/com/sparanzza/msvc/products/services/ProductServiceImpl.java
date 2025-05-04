@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sparanzza.msvc.products.entities.Product;
+import com.sparanzza.libs.msvc.commons.entities.Product;
 import com.sparanzza.msvc.products.repositories.ProductRepository;
 import org.springframework.core.env.Environment;
 

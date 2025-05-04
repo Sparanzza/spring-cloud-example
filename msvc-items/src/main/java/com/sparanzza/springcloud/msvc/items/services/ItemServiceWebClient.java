@@ -10,8 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.sparanzza.libs.msvc.commons.entities.Product;
 import com.sparanzza.springcloud.msvc.items.models.Item;
-import com.sparanzza.springcloud.msvc.items.models.Product;
 
 // @Primary
 @Service
