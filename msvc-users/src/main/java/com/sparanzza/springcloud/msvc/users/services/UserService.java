@@ -63,12 +63,12 @@ public class UserService implements IUserService {
             userDb.setUsername(user.getUsername());
             userDb.setEnabled(user.isEnabled());
             if (user.isEnabled() == null) {
-                userDb.setEnabled(true);
+                userDb.setEnabled( true);
             } else {
                 userDb.setEnabled(user.isEnabled());
             }
             List<Role> roles = getRoles(user);
-            user.setRoles(roles);
+            userDb.setRoles(roles);
 
             return Optional.of(userRepository.save(userDb));
         }).orElseGet(Optional::empty);
