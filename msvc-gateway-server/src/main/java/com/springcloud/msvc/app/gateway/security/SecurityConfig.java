@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .csrf(CsrfSpec::disable)
                 .oauth2Login(Customizer.withDefaults())
                 .oauth2Client(Customizer.withDefaults())
-                .oauth2ResourceServer(Customizer.withDefaults())
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .build();
     }
 }
